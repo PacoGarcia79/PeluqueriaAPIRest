@@ -1,8 +1,19 @@
 package com.spring.login.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -31,6 +42,18 @@ public class Disponibilidad implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_horarioempleado")
 	private HorarioEmpleado horariosempleado;
+	
+	@Column(name="id")
+	private Long idUsuario;
+	
+	@Column(name="nombre")
+	private String nombre;
+	
+	@Column(name="id_horario")
+	private Long idHorario;
+	
+	@Column(name="hora")
+	private Time hora;
 
 	public Disponibilidad() {
 	}
@@ -66,5 +89,39 @@ public class Disponibilidad implements Serializable {
 	public void setHorariosempleado(HorarioEmpleado horariosempleado) {
 		this.horariosempleado = horariosempleado;
 	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Long getIdHorario() {
+		return idHorario;
+	}
+
+	public void setIdHorario(Long idHorario) {
+		this.idHorario = idHorario;
+	}
+
+	public Time getHora() {
+		return hora;
+	}
+
+	public void setHora(Time hora) {
+		this.hora = hora;
+	}
+	
+	
 
 }
