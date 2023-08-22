@@ -33,6 +33,10 @@ public class ServicioController {
 	@Autowired
 	ServicioRepository servicioRepository;
 
+	/**
+	 * Este metodo se usa para obtener el listado de todos los servicios
+	 * @return
+	 */
 	@GetMapping("/getServicios")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
@@ -43,18 +47,33 @@ public class ServicioController {
 				: new ResponseEntity<>(servicios, HttpStatus.OK);
 	}
 
+	/**
+	 * Este metodo se usa para añadir un servicio
+	 * @param servicio
+	 * @return
+	 */
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<Servicio> postServicio(@RequestBody Servicio servicio) {
 		return new ResponseEntity<>(servicioRepository.save(servicio), HttpStatus.OK);
 	}
 
+	/**
+	 * Este metodo se usa para modificar un servicio existente
+	 * @param servicio
+	 * @return
+	 */
 	@PutMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<Servicio> putServicio(@RequestBody Servicio servicio) {
 		return new ResponseEntity<>(servicioRepository.save(servicio), HttpStatus.OK);
 	}
 
+	/**
+	 * Este metodo se usa para eliminar un servicio existente
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/{idServicio}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<MessageResponse> deleteServicio(@PathVariable(name = "idServicio") Long id) {

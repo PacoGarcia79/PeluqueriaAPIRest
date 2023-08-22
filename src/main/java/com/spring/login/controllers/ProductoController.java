@@ -31,6 +31,10 @@ public class ProductoController {
 	@Autowired
 	private ProductoService productoService;
 
+	/**
+	 * Este metodo se usa para obtener el listado de todos los productos
+	 * @return
+	 */
 	@GetMapping("/getProductos")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
@@ -40,6 +44,11 @@ public class ProductoController {
 		return productos.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productos, HttpStatus.OK);
 	}
 	
+	/**
+	 * Este metodo se usa para obtener el listado de todos los productos en un grupo determinado
+	 * @param grupo
+	 * @return
+	 */
 	@GetMapping("/{grupo}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
@@ -49,18 +58,33 @@ public class ProductoController {
 		return productosByGrupo.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productosByGrupo, HttpStatus.OK);
 	}
 	
+	/**
+	 * Este metodo se usa para añadir un producto
+	 * @param producto
+	 * @return
+	 */
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<Producto> postProducto(@RequestBody Producto producto) {
 		return new ResponseEntity<>(productoService.save(producto), HttpStatus.OK);
 	}
 	
+	/**
+	 * Este metodo se usa para modificar un producto existente
+	 * @param producto
+	 * @return
+	 */
 	@PutMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<Producto> putProducto(@RequestBody Producto producto) {
 		return new ResponseEntity<>(productoService.save(producto), HttpStatus.OK);
 	}
 	
+	/**
+	 * Este metodo se usa para eliminar un producto existente
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("/{idProducto}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<MessageResponse> deleteServicio(@PathVariable(name = "idProducto") Long id) {
@@ -77,6 +101,11 @@ public class ProductoController {
 		}
 	}
 	
+	/**
+	 * Este metodo se usa para obtener el listado de productos obtenidos en una búsqueda
+	 * @param query
+	 * @return
+	 */
 	@GetMapping("/search/{query}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody

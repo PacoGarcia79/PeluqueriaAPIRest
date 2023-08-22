@@ -34,6 +34,10 @@ public class HorarioController {
 	@Autowired
 	private HorarioService horarioService;
 
+	/**
+	 * Este metodo se usa para obtener el listado de horarios
+	 * @return
+	 */
 	@GetMapping("/getHorarios")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
@@ -43,6 +47,11 @@ public class HorarioController {
 		return horarios.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(horarios, HttpStatus.OK);
 	}
 
+	/**
+	 * Este metodo se usa para obtener el listado de no disponibilidad
+	 * @return
+	 * @throws SQLException
+	 */
 	@GetMapping("/noAvailabilityDates")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
@@ -54,6 +63,15 @@ public class HorarioController {
 				: new ResponseEntity<>(noAvailabilityDates, HttpStatus.OK);
 	}
 
+	/**
+	 * Este metodo se usa para añadir el/los horario/s del/los empleado/s al listado de no disponibilidad,
+     * para una fecha o un periodo de fechas
+	 * @param fechaComienzo
+	 * @param fechaFinal
+	 * @param empleados
+	 * @param horarios
+	 * @return
+	 */
 	@PutMapping("/addNoAvailabilityDates/{fechaComienzo}/{fechaFin}/{empleados}/{horas}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<MessageResponse> addNoAvailabilityDates(@PathVariable("fechaComienzo") Date fechaComienzo,
@@ -65,6 +83,15 @@ public class HorarioController {
 		return getResponseMessage(result);
 	}
 	
+	/**
+	 * Este metodo se usa para eliminar el/los horario/s del/los empleado/s del listado de no disponibilidad,
+     * para una fecha o un periodo de fechas
+	 * @param fechaComienzo
+	 * @param fechaFinal
+	 * @param empleados
+	 * @param horarios
+	 * @return
+	 */
 	@PutMapping("/delNoAvailabilityDates/{fechaComienzo}/{fechaFin}/{empleados}/{horas}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<MessageResponse> delNoAvailabilityDates(@PathVariable("fechaComienzo") Date fechaComienzo,
@@ -76,6 +103,12 @@ public class HorarioController {
 		return getResponseMessage(result);
 	}
 	
+	/**
+	 * Este metodo se usa para eliminar el/los horario/s del/los empleado/s del
+     * listado de no disponibilidad, usando los ids de los registros.
+	 * @param ids
+	 * @return
+	 */
 	@PutMapping("/delNoAvailabilityDatesById/{ids}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<MessageResponse> delNoAvailabilityDatesById(@PathVariable("ids") String ids) {
@@ -96,6 +129,11 @@ public class HorarioController {
 		}
 	}
 	
+	/**
+	 * Este metodo se usa para añadir un horario
+	 * @param horario
+	 * @return
+	 */
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<Horario> postHorario(@RequestBody Horario horario) {

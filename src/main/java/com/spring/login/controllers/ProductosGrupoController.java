@@ -28,6 +28,10 @@ public class ProductosGrupoController {
 	@Autowired
 	private ProductosGrupoService productosGrupoService;
 
+	/**
+	 * Este metodo se usa para obtener el listado de todos los grupos de productos.
+	 * @return
+	 */
 	@GetMapping("/getProductosGrupo")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
@@ -37,18 +41,33 @@ public class ProductosGrupoController {
 		return productosGrupo.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productosGrupo, HttpStatus.OK);
 	}
 	
+	/**
+	 * Este metodo se usa para añadir un grupo de productos
+	 * @param productosGrupo
+	 * @return
+	 */
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<ProductosGrupo> postProductosGrupo(@RequestBody ProductosGrupo productosGrupo) {
 		return new ResponseEntity<>(productosGrupoService.save(productosGrupo), HttpStatus.OK);
 	}
 	
+	/**
+	 * Este metodo se usa para modificar un grupo de productos existente
+	 * @param productosGrupo
+	 * @return
+	 */
 	@PutMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<ProductosGrupo> putProductosGrupo(@RequestBody ProductosGrupo productosGrupo) {
 		return new ResponseEntity<>(productosGrupoService.save(productosGrupo), HttpStatus.OK);
 	}
 	
+	/**
+	 * Este metodo se usa para obtener el id de un grupo de productos, mediante el nombre
+	 * @param nombreGrupo
+	 * @return
+	 */
 	@GetMapping("/{nombreGrupo}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	public ResponseEntity<Long> getProductosGrupoIdByNombreGrupo(@PathVariable(name= "nombreGrupo") String nombreGrupo) {
