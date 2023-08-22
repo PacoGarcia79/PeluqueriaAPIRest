@@ -13,13 +13,16 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.login.models.Disponibilidad;
 import com.spring.login.models.Horario;
+import com.spring.login.models.Servicio;
 import com.spring.login.payload.response.MessageResponse;
 import com.spring.login.security.services.HorarioService;
 
@@ -93,5 +96,10 @@ public class HorarioController {
 		}
 	}
 	
+	@PostMapping()
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	public ResponseEntity<Horario> postHorario(@RequestBody Horario horario) {
+		return new ResponseEntity<>(horarioService.save(horario), HttpStatus.OK);
+	}
 	
 }

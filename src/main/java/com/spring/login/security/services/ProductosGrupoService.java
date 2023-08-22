@@ -17,4 +17,12 @@ public class ProductosGrupoService {
 	public List<ProductosGrupo> findAll(){
 		return productosGrupoRepository.findAll();
 	}
+	
+	public ProductosGrupo save(ProductosGrupo productosGrupo) {
+		return productosGrupoRepository.save(productosGrupo);
+	}
+	
+	public Long findIdByNombreGrupo(String nombreGrupo) {
+		return productosGrupoRepository.findIdByNombreGrupo(nombreGrupo);
+	}
 }

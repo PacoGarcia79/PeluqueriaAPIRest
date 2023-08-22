@@ -9,6 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,4 +36,26 @@ public class ProductosGrupoController {
 
 		return productosGrupo.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productosGrupo, HttpStatus.OK);
 	}
+	
+	@PostMapping()
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	public ResponseEntity<ProductosGrupo> postProductosGrupo(@RequestBody ProductosGrupo productosGrupo) {
+		return new ResponseEntity<>(productosGrupoService.save(productosGrupo), HttpStatus.OK);
+	}
+	
+	@PutMapping()
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	public ResponseEntity<ProductosGrupo> putProductosGrupo(@RequestBody ProductosGrupo productosGrupo) {
+		return new ResponseEntity<>(productosGrupoService.save(productosGrupo), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{nombreGrupo}")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	public ResponseEntity<Long> getProductosGrupoIdByNombreGrupo(@PathVariable(name= "nombreGrupo") String nombreGrupo) {
+		Long productosGrupoId = productosGrupoService.findIdByNombreGrupo(nombreGrupo);
+		
+		return productosGrupoId == null ? ResponseEntity.noContent().build() : new ResponseEntity<>(productosGrupoId, HttpStatus.OK);
+	}
+	
+	
 }

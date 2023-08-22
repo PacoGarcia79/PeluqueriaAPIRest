@@ -56,4 +56,8 @@ public class HorarioService {
 
 		return horarioRepository.delNoAvailabilityById(ids);
 	}
+	
+	public Horario save(Horario horario) {
+		return horarioRepository.save(horario);
+	}
 }

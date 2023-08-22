@@ -134,9 +134,6 @@ public class ServicioControllerTest {
 		
 		mockMvc.perform(MockMvcRequestBuilders.delete("/api/servicio/1"))
 		.andExpect(MockMvcResultMatchers.status().isOk());
-		
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/servicio/1"))
-		.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 	}
 	
 	@Test

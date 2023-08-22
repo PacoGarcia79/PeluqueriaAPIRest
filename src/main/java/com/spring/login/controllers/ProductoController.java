@@ -32,7 +32,7 @@ public class ProductoController {
 	private ProductoService productoService;
 
 	@GetMapping("/getProductos")
-	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
 	public ResponseEntity<List<Producto>> getProductos() {
 		List<Producto> productos = productoService.findAll();
@@ -41,7 +41,7 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/{grupo}")
-	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
 	public ResponseEntity<List<Producto>> getProductosByGrupo(@PathVariable("grupo") String grupo) {
 		List<Producto> productosByGrupo = productoService.findProductsByGroup(grupo);
@@ -78,7 +78,7 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/search/{query}")
-	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
 	public ResponseEntity<List<Producto>> getProductosByQuerySearch(@PathVariable("query") String query) {
 		List<Producto> productosByQuerySearch = productoService.findProductsByQuerySearch(query);

@@ -24,8 +24,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.login.models.Disponibilidad;
 import com.spring.login.models.Horario;
+import com.spring.login.models.Servicio;
 import com.spring.login.repository.HorarioRepository;
 import com.spring.login.security.services.HorarioService;
 import com.spring.login.utils.TestUtils;
@@ -190,4 +192,22 @@ public class HorarioControllerTest {
 				.andExpect(status().isOk());
 	}
 
+	@Test
+	public void postHorarioOkTest() throws Exception {
+
+		TestUtils.mockAuthUser("EMPLEADO");
+
+		Horario horario1 = new Horario();
+		LocalTime localTime1 = LocalTime.of(10, 30, 0);
+		horario1.setHora(Time.valueOf(localTime1));
+
+		when(horarioService.save(Mockito.any(Horario.class))).thenReturn(horario1);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json = objectMapper.writeValueAsString(horario1);
+
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/horario/").content(json)
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.jsonPath("@.hora").value("10:30:00"));
+	}
 }
