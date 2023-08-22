@@ -29,7 +29,7 @@ public class ProductosGrupoController {
 	private ProductosGrupoService productosGrupoService;
 
 	@GetMapping("/getProductosGrupo")
-	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
 	public ResponseEntity<List<ProductosGrupo>> getProductosGrupo() {
 		List<ProductosGrupo> productosGrupo = productosGrupoService.findAll();
@@ -50,7 +50,7 @@ public class ProductosGrupoController {
 	}
 	
 	@GetMapping("/{nombreGrupo}")
-	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	public ResponseEntity<Long> getProductosGrupoIdByNombreGrupo(@PathVariable(name= "nombreGrupo") String nombreGrupo) {
 		Long productosGrupoId = productosGrupoService.findIdByNombreGrupo(nombreGrupo);
 		
