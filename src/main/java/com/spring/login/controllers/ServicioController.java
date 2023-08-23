@@ -46,6 +46,16 @@ public class ServicioController {
 		return servicios.isEmpty() ? ResponseEntity.noContent().build()
 				: new ResponseEntity<>(servicios, HttpStatus.OK);
 	}
+	
+	@GetMapping("/{id}")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	@ResponseBody
+	public ResponseEntity<Servicio> getServicioById(@PathVariable Long id) {
+		Optional<Servicio> servicioOpt = servicioRepository.findById(id);
+
+		return !servicioOpt.isPresent() ? ResponseEntity.noContent().build()
+				: new ResponseEntity<>(servicioOpt.get(), HttpStatus.OK);
+	}
 
 	/**
 	 * Este metodo se usa para añadir un servicio

@@ -26,4 +26,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findByEmail(@Param("email") String email);
 	
 	User findUserById(@Param("id") Long id);
+	
+	@Query(value = "CALL testdb.addhorariosuser();", nativeQuery = true)	
+	Long addHorariosToUser();
+	
+	@Query(value = "CALL testdb.listaempleadosfaltaservicio(:idServicio);", nativeQuery = true)
+	List<User> findUsersWithoutService(@Param("idServicio") Long idServicio);
 }

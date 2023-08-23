@@ -1,7 +1,6 @@
 package com.spring.login.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.login.models.Servicio;
 import com.spring.login.models.User;
 import com.spring.login.payload.response.MessageResponse;
 import com.spring.login.security.services.UserService;
@@ -31,9 +29,10 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	
+
 	/**
 	 * Este metodo se usa para obtener el listado completo de usuarios
+	 * 
 	 * @return
 	 */
 	@GetMapping("/getUsers")
@@ -44,9 +43,10 @@ public class UserController {
 
 		return usuarios.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(usuarios, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Este metodo se usa para obtener el listado completo de usuarios por rol
+	 * 
 	 * @return
 	 */
 	@GetMapping("/getUsers/{role}")
@@ -55,11 +55,13 @@ public class UserController {
 	public ResponseEntity<List<User>> getUsersByRole(@PathVariable(name = "role") String role) {
 		List<User> usuariosByRole = userService.findAllUsersByRole(role);
 
-		return usuariosByRole.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(usuariosByRole, HttpStatus.OK);
+		return usuariosByRole.isEmpty() ? ResponseEntity.noContent().build()
+				: new ResponseEntity<>(usuariosByRole, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Este metodo se usa para modificar datos de un usuario
+	 * 
 	 * @param user
 	 * @return
 	 */
@@ -68,9 +70,10 @@ public class UserController {
 	public ResponseEntity<User> putUser(@RequestBody User user) {
 		return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Este metodo se usa para encontrar usuario por su email
+	 * 
 	 * @param email
 	 * @return
 	 */
@@ -80,9 +83,10 @@ public class UserController {
 	public ResponseEntity<User> findByEmail(@PathVariable(name = "email") String email) {
 		return new ResponseEntity<>(userService.findByEmail(email), HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Este metodo se usa para encontrar usuario por su id
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -90,11 +94,14 @@ public class UserController {
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
 	public ResponseEntity<User> findUserById(@PathVariable(name = "id") Long id) {
-		return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
+		User user = userService.findUserById(id);
+		return user == null ? ResponseEntity.noContent().build()
+				: new ResponseEntity<>(user, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Este metodo se usa para añadir un nuevo usuario a la BBDD
+	 * 
 	 * @param user
 	 * @return
 	 */
@@ -103,9 +110,10 @@ public class UserController {
 	public ResponseEntity<User> postUser(@RequestBody User user) {
 		return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Este metodo se usa para eliminar un usuario.
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -117,11 +125,33 @@ public class UserController {
 
 		if (user != null) {
 			userService.deleteUser(id);
-			return new ResponseEntity<>(new MessageResponse("Borrado correctamente"), 
-					HttpStatus.OK);
+			return new ResponseEntity<>(new MessageResponse("Borrado correctamente"), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new MessageResponse("Error al borrar - No se encuentra el registro"), 
+			return new ResponseEntity<>(new MessageResponse("Error al borrar - No se encuentra el registro"),
 					HttpStatus.CONFLICT);
 		}
+	}
+
+	/**
+	 * Este metodo se usa para añadir los horarios a cada empleado.
+	 * @return
+	 */
+	@PutMapping("/horarios")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')") 
+	public ResponseEntity<Boolean> addHorariosToUser() {
+		return new ResponseEntity<>(userService.addHorariosToUser(), HttpStatus.OK);
+	}
+	
+	/**
+	 * Este metodo se usa para obtener el listado de empleados que no tengan
+     * asignado un servicio determinado.
+	 * @param idServicio
+	 * @return
+	 */
+	@GetMapping("noService/{idServicio}")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')") 
+	@ResponseBody
+	public ResponseEntity<List<User>> findUsersWithoutService(@PathVariable(name = "idServicio") Long idServicio) {
+		return new ResponseEntity<>(userService.findUsersWithoutService(idServicio), HttpStatus.OK);
 	}
 }
