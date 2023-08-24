@@ -47,6 +47,10 @@ public class ServicioController {
 				: new ResponseEntity<>(servicios, HttpStatus.OK);
 	}
 	
+	/**
+	 * Este metodo se usa para obtener un servicio por su id
+	 * @return
+	 */
 	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody

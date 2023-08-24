@@ -119,7 +119,7 @@ public class UserController {
 	 */
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
-	public ResponseEntity<MessageResponse> deleteUsuario(@PathVariable(name = "id") Long id) {
+	public ResponseEntity<MessageResponse> deleteUser(@PathVariable(name = "id") Long id) {
 
 		User user = userService.findUserById(id);
 

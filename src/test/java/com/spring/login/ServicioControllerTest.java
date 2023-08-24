@@ -64,6 +64,24 @@ public class ServicioControllerTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("@.[0].nombre").value("Corte Pelo"));
 
 	}
+	
+	@Test
+	public void getServiceByIdOkTest() throws Exception {
+
+		TestUtils.mockAuthUser("EMPLEADO");
+
+		Servicio servicio1 = new Servicio();
+		servicio1.setNombre("Corte Pelo");
+		
+		Optional<Servicio> optServ = Optional.of(servicio1);
+
+		when(servicioRepository.findById(Mockito.anyLong())).thenReturn(optServ);
+
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/servicio/{id}", 1).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.jsonPath("@.nombre").value("Corte Pelo"));
+
+	}
 
 	@Test
 	// @WithMockUser(roles = "USER")
