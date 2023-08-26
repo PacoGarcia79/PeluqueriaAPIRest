@@ -1,5 +1,8 @@
 package com.spring.login.security.services;
 
+import java.math.BigInteger;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +48,46 @@ public class UserService {
 	
 	public List<User> findUsersWithoutService(Long idServicio){
 		return userRepository.findUsersWithoutService(idServicio);
+	}
+	
+
+	public List<User> findEmployeesAvailableByDateTime(Long idTime, Date date) {
+		List<List<Object>> employeesAvailableByDateTimeObj = userRepository.findEmployeesAvailableByDateTime(idTime, date);
+		List<User> employeesAvailableByDateTime = new ArrayList<>();
+		for (List<Object> rawData : employeesAvailableByDateTimeObj) {
+			User user = new User();
+			user.setId(((BigInteger) rawData.get(0)).longValue());
+			user.setNombre((String) rawData.get(1));
+			user.setApellidos((String) rawData.get(2));
+			user.setUsername((String) rawData.get(3));
+			user.setEmail((String) rawData.get(4));
+			user.setTelefono((String) rawData.get(5));
+			user.setFechaAlta((Date) rawData.get(6));
+			user.setFoto((String) rawData.get(8));
+			user.setPassword((String) rawData.get(9));
+			employeesAvailableByDateTime.add(user);
+		}		
+		
+		return employeesAvailableByDateTime;
+	}
+	
+	public List<User> findEmployeesAvailableByDate(Date date) {
+		List<List<Object>> employeesAvailableByDateObj = userRepository.findEmployeesAvailableByDate(date);
+		List<User> employeesAvailableByDate = new ArrayList<>();
+		for (List<Object> rawData : employeesAvailableByDateObj) {
+			User user = new User();
+			user.setId(((BigInteger) rawData.get(0)).longValue());
+			user.setNombre((String) rawData.get(1));
+			user.setApellidos((String) rawData.get(2));
+			user.setUsername((String) rawData.get(3));
+			user.setEmail((String) rawData.get(4));
+			user.setTelefono((String) rawData.get(5));
+			user.setFechaAlta((Date) rawData.get(6));
+			user.setFoto((String) rawData.get(8));
+			user.setPassword((String) rawData.get(9));
+			employeesAvailableByDate.add(user);
+		}		
+		
+		return employeesAvailableByDate;
 	}
 }

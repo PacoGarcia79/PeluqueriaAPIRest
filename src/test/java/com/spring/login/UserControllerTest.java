@@ -22,8 +22,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.login.models.Producto;
-import com.spring.login.models.ProductosGrupo;
+import com.spring.login.models.Product;
+import com.spring.login.models.ProductGroup;
 import com.spring.login.models.User;
 import com.spring.login.repository.UserRepository;
 import com.spring.login.security.services.UserService;

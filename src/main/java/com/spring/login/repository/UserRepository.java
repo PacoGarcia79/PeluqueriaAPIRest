@@ -1,5 +1,6 @@
 package com.spring.login.repository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,4 +33,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	@Query(value = "CALL testdb.listaempleadosfaltaservicio(:idServicio);", nativeQuery = true)
 	List<User> findUsersWithoutService(@Param("idServicio") Long idServicio);
+	
+	@Query(value = "CALL testdb.empleadosdisponiblesfechahora(:id,:date);", nativeQuery = true)
+	List<List<Object>> findEmployeesAvailableByDateTime(@Param("id") Long idTime, @Param("date") Date date);
+
+	@Query(value = "CALL testdb.empleadosdisponiblesfecha(:date);", nativeQuery = true)
+	List<List<Object>> findEmployeesAvailableByDate(@Param("date") Date date);
 }

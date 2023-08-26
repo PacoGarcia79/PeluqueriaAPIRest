@@ -1,5 +1,6 @@
 package com.spring.login.controllers;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,5 +154,37 @@ public class UserController {
 	@ResponseBody
 	public ResponseEntity<List<User>> findUsersWithoutService(@PathVariable(name = "idServicio") Long idServicio) {
 		return new ResponseEntity<>(userService.findUsersWithoutService(idServicio), HttpStatus.OK);
+	}
+	
+	
+	/**
+	 * Este metodo se usa para obtener el listado de empleados libres en una fecha y horario determinado
+	 * @param idTime
+	 * @param date
+	 * @return
+	 */
+	@GetMapping("/employeeAvailableByDateTime/{time}/{date}")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	@ResponseBody
+	public ResponseEntity<List<User>> getEmployeesAvailableByDateTime(@PathVariable(name = "time") Long idTime, @PathVariable(name = "date") Date date){
+		List<User> employeesAvailable = userService.findEmployeesAvailableByDateTime(idTime, date);
+		
+		return employeesAvailable.isEmpty() ? ResponseEntity.noContent().build()
+				: new ResponseEntity<>(employeesAvailable, HttpStatus.OK); 
+	}
+	
+	/**
+	 * Este metodo se usa para obtener el listado de empleados libres en una fecha determinada
+	 * @param date
+	 * @return
+	 */
+	@GetMapping("/employeeAvailableByDate/{date}")
+	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+	@ResponseBody
+	public ResponseEntity<List<User>> getEmployeesAvailableByDate(@PathVariable(name = "date") Date date){
+		List<User> employeesAvailable = userService.findEmployeesAvailableByDate(date);
+		
+		return employeesAvailable.isEmpty() ? ResponseEntity.noContent().build()
+				: new ResponseEntity<>(employeesAvailable, HttpStatus.OK); 
 	}
 }
