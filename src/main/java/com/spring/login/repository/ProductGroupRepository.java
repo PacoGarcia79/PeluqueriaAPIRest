@@ -12,5 +12,5 @@ public interface ProductGroupRepository extends JpaRepository<ProductGroup, Long
 	@Query(value = "SELECT id_productogrupo from productos_grupo where "
 			+ "nombre_grupo = :nombreGrupo", 
             nativeQuery = true)
-	Long findIdByNombreGrupo(@Param("nombreGrupo") String nombreGrupo);
+	Long findIdByGroupName(@Param("nombreGrupo") String nombreGrupo);
 }

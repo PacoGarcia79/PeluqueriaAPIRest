@@ -19,29 +19,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.login.constants.ApiConstants;
 import com.spring.login.models.Product;
 import com.spring.login.payload.response.MessageResponse;
 import com.spring.login.security.services.ProductService;
 
 @RestController
-@RequestMapping(path = "/api/producto", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+@RequestMapping(path = "/api/product", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 @CrossOrigin(origins = "*")
 public class ProductController {
 	
 	@Autowired
-	private ProductService productoService;
+	private ProductService productService;
 
 	/**
 	 * Este metodo se usa para obtener el listado de todos los productos
 	 * @return
 	 */
-	@GetMapping("/getProductos")
+	@GetMapping("/getProducts")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
-	public ResponseEntity<List<Product>> getProductos() {
-		List<Product> productos = productoService.findAll();
+	public ResponseEntity<List<Product>> getProducts() {
+		List<Product> products = productService.findAll();
 
-		return productos.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productos, HttpStatus.OK);
+		return products.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(products, HttpStatus.OK);
 	}
 	
 	/**
@@ -49,35 +50,35 @@ public class ProductController {
 	 * @param grupo
 	 * @return
 	 */
-	@GetMapping("/{grupo}")
+	@GetMapping("/{group}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
-	public ResponseEntity<List<Product>> getProductosByGrupo(@PathVariable("grupo") String grupo) {
-		List<Product> productosByGrupo = productoService.findProductsByGroup(grupo);
+	public ResponseEntity<List<Product>> getProductsByGroup(@PathVariable("group") String grupo) {
+		List<Product> productsByGrupo = productService.findProductsByGroup(grupo);
 
-		return productosByGrupo.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productosByGrupo, HttpStatus.OK);
+		return productsByGrupo.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productsByGrupo, HttpStatus.OK);
 	}
 	
 	/**
 	 * Este metodo se usa para añadir un producto
-	 * @param producto
+	 * @param product
 	 * @return
 	 */
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<Product> postProducto(@RequestBody Product producto) {
-		return new ResponseEntity<>(productoService.save(producto), HttpStatus.OK);
+	public ResponseEntity<Product> postProduct(@RequestBody Product product) {
+		return new ResponseEntity<>(productService.save(product), HttpStatus.OK);
 	}
 	
 	/**
 	 * Este metodo se usa para modificar un producto existente
-	 * @param producto
+	 * @param product
 	 * @return
 	 */
 	@PutMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<Product> putProducto(@RequestBody Product producto) {
-		return new ResponseEntity<>(productoService.save(producto), HttpStatus.OK);
+	public ResponseEntity<Product> putProduct(@RequestBody Product product) {
+		return new ResponseEntity<>(productService.save(product), HttpStatus.OK);
 	}
 	
 	/**
@@ -87,16 +88,16 @@ public class ProductController {
 	 */
 	@DeleteMapping("/{idProducto}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<MessageResponse> deleteServicio(@PathVariable(name = "idProducto") Long id) {
+	public ResponseEntity<MessageResponse> deleteProduct(@PathVariable(name = "idProducto") Long id) {
 
-		Optional<Product> optionalValue = productoService.findById(id);
+		Optional<Product> optionalValue = productService.findById(id);
 
 		if (optionalValue.isPresent()) {
-			productoService.deleteById(id);
-			return new ResponseEntity<>(new MessageResponse("Borrado correctamente"), 
+			productService.deleteById(id);
+			return new ResponseEntity<>(new MessageResponse(ApiConstants.DELETE_OK), 
 					HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new MessageResponse("Error al borrar - No se encuentra el registro"), 
+			return new ResponseEntity<>(new MessageResponse(ApiConstants.DELETE_OK), 
 					HttpStatus.CONFLICT);
 		}
 	}
@@ -109,10 +110,10 @@ public class ProductController {
 	@GetMapping("/search/{query}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
-	public ResponseEntity<List<Product>> getProductosByQuerySearch(@PathVariable("query") String query) {
-		List<Product> productosByQuerySearch = productoService.findProductsByQuerySearch(query);
+	public ResponseEntity<List<Product>> getProductsByQuerySearch(@PathVariable("query") String query) {
+		List<Product> productsByQuerySearch = productService.findProductsByQuerySearch(query);
 
-		return productosByQuerySearch.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productosByQuerySearch, HttpStatus.OK);
+		return productsByQuerySearch.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productsByQuerySearch, HttpStatus.OK);
 	}
 
 }

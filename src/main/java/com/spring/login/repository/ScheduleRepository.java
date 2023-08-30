@@ -18,11 +18,11 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
 	@Query(value = "CALL testdb.addnoavailability(:fechaComienzo, :fechaFin, :empleados, :horas);", nativeQuery = true)
 	int addNoAvailability(@Param("fechaComienzo") Date fechaComienzo, @Param("fechaFin") Date fechaFinal,
-			@Param("empleados") String empleados, @Param("horas") String horarios);
+			@Param("empleados") String empleados, @Param("horas") String schedule);
 	
 	@Query(value = "CALL testdb.delnoavailability(:fechaComienzo, :fechaFin, :empleados, :horas);", nativeQuery = true)
 	int delNoAvailability(@Param("fechaComienzo") Date fechaComienzo, @Param("fechaFin") Date fechaFinal,
-			@Param("empleados") String empleados, @Param("horas") String horarios);
+			@Param("empleados") String empleados, @Param("horas") String schedule);
 	
 	@Query(value = "CALL testdb.deldisponibilidadporid(:ids);", nativeQuery = true)
 	int delNoAvailabilityById(@Param("ids") String ids);

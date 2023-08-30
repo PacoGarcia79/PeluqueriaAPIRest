@@ -10,9 +10,9 @@ import com.spring.login.repository.EmployeeServiceRepository;
 public class EmployeeServiceService {
 
 	@Autowired
-	EmployeeServiceRepository servicioEmpleadoRepository;
+	EmployeeServiceRepository employeeServiceRepository;
 	
-	public EmployeeService save(EmployeeService servicioEmpleado) {
-		return servicioEmpleadoRepository.save(servicioEmpleado);
+	public EmployeeService save(EmployeeService employeeService) {
+		return employeeServiceRepository.save(employeeService);
 	}
 }

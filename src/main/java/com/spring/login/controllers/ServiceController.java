@@ -20,31 +20,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.login.constants.ApiConstants;
 import com.spring.login.models.Service;
 import com.spring.login.payload.response.MessageResponse;
 import com.spring.login.repository.ServiceRepository;
 
 @RestController
-@RequestMapping(path = "/api/servicio", produces = { MediaType.APPLICATION_JSON_VALUE,
+@RequestMapping(path = "/api/service", produces = { MediaType.APPLICATION_JSON_VALUE,
 		MediaType.APPLICATION_XML_VALUE })
 @CrossOrigin(origins = "*")
 public class ServiceController {
 
 	@Autowired
-	ServiceRepository servicioRepository;
+	ServiceRepository serviceRepository;
 
 	/**
 	 * Este metodo se usa para obtener el listado de todos los servicios
 	 * @return
 	 */
-	@GetMapping("/getServicios")
+	@GetMapping("/getServices")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
-	public ResponseEntity<List<Service>> getServicios() {
-		List<Service> servicios = servicioRepository.findAll();
+	public ResponseEntity<List<Service>> getServices() {
+		List<Service> services = serviceRepository.findAll();
 
-		return servicios.isEmpty() ? ResponseEntity.noContent().build()
-				: new ResponseEntity<>(servicios, HttpStatus.OK);
+		return services.isEmpty() ? ResponseEntity.noContent().build()
+				: new ResponseEntity<>(services, HttpStatus.OK);
 	}
 	
 	/**
@@ -54,33 +55,33 @@ public class ServiceController {
 	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
-	public ResponseEntity<Service> getServicioById(@PathVariable Long id) {
-		Optional<Service> servicioOpt = servicioRepository.findById(id);
+	public ResponseEntity<Service> getServiceById(@PathVariable Long id) {
+		Optional<Service> serviceOpt = serviceRepository.findById(id);
 
-		return !servicioOpt.isPresent() ? ResponseEntity.noContent().build()
-				: new ResponseEntity<>(servicioOpt.get(), HttpStatus.OK);
+		return !serviceOpt.isPresent() ? ResponseEntity.noContent().build()
+				: new ResponseEntity<>(serviceOpt.get(), HttpStatus.OK);
 	}
 
 	/**
 	 * Este metodo se usa para añadir un servicio
-	 * @param servicio
+	 * @param service
 	 * @return
 	 */
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<Service> postServicio(@RequestBody Service servicio) {
-		return new ResponseEntity<>(servicioRepository.save(servicio), HttpStatus.OK);
+	public ResponseEntity<Service> postService(@RequestBody Service service) {
+		return new ResponseEntity<>(serviceRepository.save(service), HttpStatus.OK);
 	}
 
 	/**
 	 * Este metodo se usa para modificar un servicio existente
-	 * @param servicio
+	 * @param service
 	 * @return
 	 */
 	@PutMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<Service> putServicio(@RequestBody Service servicio) {
-		return new ResponseEntity<>(servicioRepository.save(servicio), HttpStatus.OK);
+	public ResponseEntity<Service> putService(@RequestBody Service service) {
+		return new ResponseEntity<>(serviceRepository.save(service), HttpStatus.OK);
 	}
 
 	/**
@@ -90,19 +91,19 @@ public class ServiceController {
 	 */
 	@DeleteMapping("/{idServicio}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<MessageResponse> deleteServicio(@PathVariable(name = "idServicio") Long id) {
+	public ResponseEntity<MessageResponse> deleteService(@PathVariable(name = "idServicio") Long id) {
 
-		Optional<Service> optionalValue = servicioRepository.findById(id);
+		Optional<Service> optionalValue = serviceRepository.findById(id);
 
 		if (optionalValue.isPresent()) {
-			servicioRepository.deleteById(id);
-			return new ResponseEntity<>(new MessageResponse("Borrado correctamente"), 
+			serviceRepository.deleteById(id);
+			return new ResponseEntity<>(new MessageResponse(ApiConstants.DELETE_OK), 
 					HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new MessageResponse("Error al borrar - No se encuentra el registro"), 
+			return new ResponseEntity<>(new MessageResponse(ApiConstants.DELETE_OK), 
 					HttpStatus.CONFLICT);
 		}
 	}
 
-	//TODO serviciosEmpleadosGet y siguientes if necessary
+	
 }

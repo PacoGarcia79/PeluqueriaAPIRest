@@ -15,11 +15,11 @@ public class AppointmentService {
 	@Autowired
 	AppointmentRepository citaRepository;
 
-	public List<Appointment> getAllCitas() {
+	public List<Appointment> getAllAppointments() {
 		return citaRepository.findAll();
 	}
 
-	public Optional<Appointment> getCitaById(Long idCita) {
+	public Optional<Appointment> getAppointmentById(Long idCita) {
 		return citaRepository.findById(idCita);
 	}	
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.login.constants.ApiConstants;
 import com.spring.login.models.User;
 import com.spring.login.payload.response.MessageResponse;
 import com.spring.login.security.services.UserService;
@@ -40,9 +41,9 @@ public class UserController {
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
 	public ResponseEntity<List<User>> getUsers() {
-		List<User> usuarios = userService.findAllUsers();
+		List<User> users = userService.findAllUsers();
 
-		return usuarios.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(usuarios, HttpStatus.OK);
+		return users.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
 	/**
@@ -54,10 +55,10 @@ public class UserController {
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
 	public ResponseEntity<List<User>> getUsersByRole(@PathVariable(name = "role") String role) {
-		List<User> usuariosByRole = userService.findAllUsersByRole(role);
+		List<User> usersByRole = userService.findAllUsersByRole(role);
 
-		return usuariosByRole.isEmpty() ? ResponseEntity.noContent().build()
-				: new ResponseEntity<>(usuariosByRole, HttpStatus.OK);
+		return usersByRole.isEmpty() ? ResponseEntity.noContent().build()
+				: new ResponseEntity<>(usersByRole, HttpStatus.OK);
 	}
 
 	/**
@@ -126,9 +127,9 @@ public class UserController {
 
 		if (user != null) {
 			userService.deleteUser(id);
-			return new ResponseEntity<>(new MessageResponse("Borrado correctamente"), HttpStatus.OK);
+			return new ResponseEntity<>(new MessageResponse(ApiConstants.DELETE_OK), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new MessageResponse("Error al borrar - No se encuentra el registro"),
+			return new ResponseEntity<>(new MessageResponse(ApiConstants.DELETE_OK),
 					HttpStatus.CONFLICT);
 		}
 	}

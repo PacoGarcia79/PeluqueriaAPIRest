@@ -12,17 +12,17 @@ import com.spring.login.repository.ProductGroupRepository;
 public class ProductGroupService {
 
 	@Autowired
-	ProductGroupRepository productosGrupoRepository;
+	ProductGroupRepository productsGroupRepository;
 	
 	public List<ProductGroup> findAll(){
-		return productosGrupoRepository.findAll();
+		return productsGroupRepository.findAll();
 	}
 	
-	public ProductGroup save(ProductGroup productosGrupo) {
-		return productosGrupoRepository.save(productosGrupo);
+	public ProductGroup save(ProductGroup productsGroup) {
+		return productsGroupRepository.save(productsGroup);
 	}
 	
-	public Long findIdByNombreGrupo(String nombreGrupo) {
-		return productosGrupoRepository.findIdByNombreGrupo(nombreGrupo);
+	public Long findIdByNombreGrupo(String groupName) {
+		return productsGroupRepository.findIdByGroupName(groupName);
 	}
 }

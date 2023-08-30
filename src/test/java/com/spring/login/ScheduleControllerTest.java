@@ -63,7 +63,7 @@ public class ScheduleControllerTest {
 		horarios.add(horario1);
 		horarios.add(horario2);
 
-		when(horarioService.getHorarios()).thenReturn(horarios);
+		when(horarioService.getSchedule()).thenReturn(horarios);
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/horario/getHorarios").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.login.constants.ApiConstants;
 import com.spring.login.models.Availability;
 import com.spring.login.models.Schedule;
 import com.spring.login.models.Service;
@@ -27,24 +28,24 @@ import com.spring.login.payload.response.MessageResponse;
 import com.spring.login.security.services.ScheduleService;
 
 @RestController
-@RequestMapping(path = "/api/horario", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+@RequestMapping(path = "/api/schedule", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 @CrossOrigin(origins = "*")
 public class ScheduleController {
 
 	@Autowired
-	private ScheduleService horarioService;
+	private ScheduleService scheduleService;
 
 	/**
-	 * Este metodo se usa para obtener el listado de horarios
+	 * Este metodo se usa para obtener el listado de schedule
 	 * @return
 	 */
-	@GetMapping("/getHorarios")
+	@GetMapping("/getSchedule")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
-	public ResponseEntity<List<Schedule>> getHorarios() {
-		List<Schedule> horarios = horarioService.getHorarios();
+	public ResponseEntity<List<Schedule>> getSchedule() {
+		List<Schedule> schedule = scheduleService.getSchedule();
 
-		return horarios.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(horarios, HttpStatus.OK);
+		return schedule.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(schedule, HttpStatus.OK);
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class ScheduleController {
 	@ResponseBody
 	public ResponseEntity<List<Availability>> findNoAvailabilityDates() throws SQLException {
 
-		List<Availability> noAvailabilityDates = horarioService.findNoAvailabilityDates();
+		List<Availability> noAvailabilityDates = scheduleService.findNoAvailabilityDates();
 
 		return noAvailabilityDates.isEmpty() ? ResponseEntity.noContent().build()
 				: new ResponseEntity<>(noAvailabilityDates, HttpStatus.OK);
@@ -69,16 +70,16 @@ public class ScheduleController {
 	 * @param fechaComienzo
 	 * @param fechaFinal
 	 * @param empleados
-	 * @param horarios
+	 * @param schedule
 	 * @return
 	 */
 	@PutMapping("/addNoAvailabilityDates/{fechaComienzo}/{fechaFin}/{empleados}/{horas}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<MessageResponse> addNoAvailabilityDates(@PathVariable("fechaComienzo") Date fechaComienzo,
 			@PathVariable("fechaFin") Date fechaFinal, @PathVariable("empleados") String empleados,
-			@PathVariable("horas") String horarios) {
+			@PathVariable("horas") String schedule) {
 
-		int result = horarioService.addNoAvailabilityDates(fechaComienzo, fechaFinal, empleados, horarios);
+		int result = scheduleService.addNoAvailabilityDates(fechaComienzo, fechaFinal, empleados, schedule);
 
 		return getResponseMessage(result);
 	}
@@ -89,16 +90,16 @@ public class ScheduleController {
 	 * @param fechaComienzo
 	 * @param fechaFinal
 	 * @param empleados
-	 * @param horarios
+	 * @param schedule
 	 * @return
 	 */
 	@PutMapping("/delNoAvailabilityDates/{fechaComienzo}/{fechaFin}/{empleados}/{horas}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<MessageResponse> delNoAvailabilityDates(@PathVariable("fechaComienzo") Date fechaComienzo,
 			@PathVariable("fechaFin") Date fechaFinal, @PathVariable("empleados") String empleados,
-			@PathVariable("horas") String horarios) {
+			@PathVariable("horas") String schedule) {
 
-		int result = horarioService.delNoAvailabilityDates(fechaComienzo, fechaFinal, empleados, horarios);
+		int result = scheduleService.delNoAvailabilityDates(fechaComienzo, fechaFinal, empleados, schedule);
 
 		return getResponseMessage(result);
 	}
@@ -113,7 +114,7 @@ public class ScheduleController {
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<MessageResponse> delNoAvailabilityDatesById(@PathVariable("ids") String ids) {
 
-		int result = horarioService.delNoAvailabilityDatesById(ids);
+		int result = scheduleService.delNoAvailabilityDatesById(ids);
 
 		return getResponseMessage(result);
 	}
@@ -121,28 +122,28 @@ public class ScheduleController {
 	private ResponseEntity<MessageResponse> getResponseMessage(int result) {
 		switch (result) {
 		case 1:
-			return new ResponseEntity<>(new MessageResponse("Registro actualizado"), HttpStatus.OK);
+			return new ResponseEntity<>(new MessageResponse(ApiConstants.REGISTER_OK), HttpStatus.OK);
 		case 2:
-			return new ResponseEntity<>(new MessageResponse("Error registro"), HttpStatus.CONFLICT);
+			return new ResponseEntity<>(new MessageResponse(ApiConstants.REGISTER_KO), HttpStatus.CONFLICT);
 		default:
-			return new ResponseEntity<>(new MessageResponse("Error al actualizar"), HttpStatus.CONFLICT);
+			return new ResponseEntity<>(new MessageResponse(ApiConstants.REGISTER_KO2), HttpStatus.CONFLICT);
 		}
 	}
 	
 	/**
 	 * Este metodo se usa para añadir un horario
-	 * @param horario
+	 * @param schedule
 	 * @return
 	 */
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<Schedule> postHorario(@RequestBody Schedule horario) {
-		return new ResponseEntity<>(horarioService.save(horario), HttpStatus.OK);
+	public ResponseEntity<Schedule> postSchedule(@RequestBody Schedule schedule) {
+		return new ResponseEntity<>(scheduleService.save(schedule), HttpStatus.OK);
 	}
 	
 
 	/**
-	 * Este metodo se usa para obtener el listado de horarios libres por
+	 * Este metodo se usa para obtener el listado de schedule libres por
      * empleado en una fecha, para la funcionalidad de citas
 	 * @param idUsuario
 	 * @param date
@@ -152,14 +153,14 @@ public class ScheduleController {
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
 	public ResponseEntity<List<Schedule>> getEmployeeFreeScheduleByDate(@PathVariable(name = "id")Long idUsuario, @PathVariable(name = "date") Date date){
-		List<Schedule> horariosFree = horarioService.findEmployeeFreeScheduleByDate(idUsuario, date);
+		List<Schedule> scheduleFree = scheduleService.findEmployeeFreeScheduleByDate(idUsuario, date);
 		
-		return horariosFree.isEmpty() ? ResponseEntity.noContent().build()
-				: new ResponseEntity<>(horariosFree, HttpStatus.OK); 
+		return scheduleFree.isEmpty() ? ResponseEntity.noContent().build()
+				: new ResponseEntity<>(scheduleFree, HttpStatus.OK); 
 	}
 	
 	/**
-	 * Este metodo se usa para obtener el listado de horarios libres en una
+	 * Este metodo se usa para obtener el listado de schedule libres en una
      * fecha determinada, para la funcionalidad de citas
 	 * @param fecha
 	 * @return
@@ -168,10 +169,10 @@ public class ScheduleController {
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
 	public ResponseEntity<List<Schedule>> getFreeScheduleByDate(@PathVariable(name = "date") Date date){
-		List<Schedule> horariosFree = horarioService.findFreeScheduleByDate(date);
+		List<Schedule> scheduleFree = scheduleService.findFreeScheduleByDate(date);
 		
-		return horariosFree.isEmpty() ? ResponseEntity.noContent().build()
-				: new ResponseEntity<>(horariosFree, HttpStatus.OK); 
+		return scheduleFree.isEmpty() ? ResponseEntity.noContent().build()
+				: new ResponseEntity<>(scheduleFree, HttpStatus.OK); 
 	}
 	
 }

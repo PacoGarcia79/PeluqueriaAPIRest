@@ -15,22 +15,24 @@ import com.spring.login.models.EmployeeService;
 import com.spring.login.security.services.EmployeeServiceService;
 
 @RestController
-@RequestMapping(path = "/api/servicioEmpleado", produces = { MediaType.APPLICATION_JSON_VALUE,
+@RequestMapping(path = "/api/employeeService", produces = { MediaType.APPLICATION_JSON_VALUE,
 		MediaType.APPLICATION_XML_VALUE })
 @CrossOrigin(origins = "*")
 public class EmployeeServiceController {
 
 	@Autowired
-	EmployeeServiceService servicioEmpleadoService;
+	EmployeeServiceService employeeServiceService;
 
 	/**
 	 * Este metodo se usa para añadir un servicio a un empleado
-	 * @param servicioEmpleado
+	 * @param employeeService
 	 * @return
 	 */
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<EmployeeService> postServicioEmpleado(@RequestBody EmployeeService servicioEmpleado) {
-		return new ResponseEntity<>(servicioEmpleadoService.save(servicioEmpleado), HttpStatus.OK);
+	public ResponseEntity<EmployeeService> postEmployeeService(@RequestBody EmployeeService employeeService) {
+		return new ResponseEntity<>(employeeServiceService.save(employeeService), HttpStatus.OK);
 	}
+	
+	//TODO serviciosEmpleadosGet y siguientes if necessary
 }

@@ -13,30 +13,30 @@ import com.spring.login.repository.ProductRepository;
 public class ProductService {
 	
 	@Autowired
-	ProductRepository productoRepository;
+	ProductRepository productRepository;
 
 	public List<Product> findAll(){
-		return productoRepository.findAll();
+		return productRepository.findAll();
 	}
 	
-	public List<Product> findProductsByGroup(String grupo){
-		return productoRepository.findProductsByGroup(grupo);
+	public List<Product> findProductsByGroup(String group){
+		return productRepository.findProductsByGroup(group);
 	}
 
 	public Product save(Product producto) {
-		return productoRepository.save(producto);
+		return productRepository.save(producto);
 	}
 	
 	public Optional<Product> findById(Long id) {
-		return productoRepository.findById(id);
+		return productRepository.findById(id);
 	}
 	
 	public void deleteById(Long id) {
-		productoRepository.deleteById(id);
+		productRepository.deleteById(id);
 	}
 	
 	public List<Product> findProductsByQuerySearch(String query){
-		return productoRepository.findProductsByQuerySearch(query);
+		return productRepository.findProductsByQuerySearch(query);
 	}
 	
 	

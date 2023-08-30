@@ -22,28 +22,28 @@ import com.spring.login.models.User;
 import com.spring.login.security.services.AppointmentService;
 
 @RestController
-@RequestMapping(path = "/api/cita", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+@RequestMapping(path = "/api/appointment", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 @CrossOrigin(origins = "*")
 public class AppointmentController {
 
 	@Autowired
-	AppointmentService citaService;
+	AppointmentService appointmentService;
 
 	/**
 	 * Este método se usa para obtener el total de citas
 	 * @return
 	 */
-	@GetMapping("/getCitas")
+	@GetMapping("/getAppointments")
 	@PreAuthorize("hasRole('CLIENTE') or hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
-	public ResponseEntity<List<Appointment>> getAllCitas() {
-		List<Appointment> citas = citaService.getAllCitas();
+	public ResponseEntity<List<Appointment>> getAllAppointments() {
+		List<Appointment> appointments = appointmentService.getAllAppointments();
 		
-		if(citas.isEmpty()) {
+		if(appointments.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
 		
-		return new ResponseEntity<>(citas, HttpStatus.OK);
+		return new ResponseEntity<>(appointments, HttpStatus.OK);
 	}
 
 	/**
@@ -54,8 +54,8 @@ public class AppointmentController {
 	@GetMapping("/{idCita}")
 	@PreAuthorize("hasRole('CLIENTE') or hasRole('EMPLEADO') or hasRole('ADMIN')")
 	@ResponseBody
-	public ResponseEntity<Appointment> getCitaById(@PathVariable(name = "idCita") Long id) {
-		Optional<Appointment> optionalValue = citaService.getCitaById(id);
+	public ResponseEntity<Appointment> getAppointmentById(@PathVariable(name = "idCita") Long id) {
+		Optional<Appointment> optionalValue = appointmentService.getAppointmentById(id);
 		
 		return optionalValue.isPresent() ? new ResponseEntity<>(optionalValue.get(), HttpStatus.OK) 
 				: ResponseEntity.notFound().build();

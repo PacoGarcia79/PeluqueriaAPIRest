@@ -21,46 +21,46 @@ import com.spring.login.models.ProductGroup;
 import com.spring.login.security.services.ProductGroupService;
 
 @RestController
-@RequestMapping(path = "/api/productosGrupo", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+@RequestMapping(path = "/api/productsGroup", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 @CrossOrigin(origins = "*")
 public class ProductGroupController {
 	
 	@Autowired
-	private ProductGroupService productosGrupoService;
+	private ProductGroupService productsGrupoService;
 
 	/**
 	 * Este metodo se usa para obtener el listado de todos los grupos de productos.
 	 * @return
 	 */
-	@GetMapping("/getProductosGrupo")
+	@GetMapping("/getProductsGroup")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
-	public ResponseEntity<List<ProductGroup>> getProductosGrupo() {
-		List<ProductGroup> productosGrupo = productosGrupoService.findAll();
+	public ResponseEntity<List<ProductGroup>> getProductsGroup() {
+		List<ProductGroup> productsGrupo = productsGrupoService.findAll();
 
-		return productosGrupo.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productosGrupo, HttpStatus.OK);
+		return productsGrupo.isEmpty() ? ResponseEntity.noContent().build() : new ResponseEntity<>(productsGrupo, HttpStatus.OK);
 	}
 	
 	/**
 	 * Este metodo se usa para añadir un grupo de productos
-	 * @param productosGrupo
+	 * @param productsGroup
 	 * @return
 	 */
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<ProductGroup> postProductosGrupo(@RequestBody ProductGroup productosGrupo) {
-		return new ResponseEntity<>(productosGrupoService.save(productosGrupo), HttpStatus.OK);
+	public ResponseEntity<ProductGroup> postProductsGroup(@RequestBody ProductGroup productsGroup) {
+		return new ResponseEntity<>(productsGrupoService.save(productsGroup), HttpStatus.OK);
 	}
 	
 	/**
 	 * Este metodo se usa para modificar un grupo de productos existente
-	 * @param productosGrupo
+	 * @param productsGroup
 	 * @return
 	 */
 	@PutMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<ProductGroup> putProductosGrupo(@RequestBody ProductGroup productosGrupo) {
-		return new ResponseEntity<>(productosGrupoService.save(productosGrupo), HttpStatus.OK);
+	public ResponseEntity<ProductGroup> putProductsGroup(@RequestBody ProductGroup productsGroup) {
+		return new ResponseEntity<>(productsGrupoService.save(productsGroup), HttpStatus.OK);
 	}
 	
 	/**
@@ -70,10 +70,10 @@ public class ProductGroupController {
 	 */
 	@GetMapping("/{nombreGrupo}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
-	public ResponseEntity<Long> getProductosGrupoIdByNombreGrupo(@PathVariable(name= "nombreGrupo") String nombreGrupo) {
-		Long productosGrupoId = productosGrupoService.findIdByNombreGrupo(nombreGrupo);
+	public ResponseEntity<Long> getProductsGrupoIdByGroupName(@PathVariable(name= "nombreGrupo") String nombreGrupo) {
+		Long productsGrupoId = productsGrupoService.findIdByNombreGrupo(nombreGrupo);
 		
-		return productosGrupoId == null ? ResponseEntity.noContent().build() : new ResponseEntity<>(productosGrupoId, HttpStatus.OK);
+		return productsGrupoId == null ? ResponseEntity.noContent().build() : new ResponseEntity<>(productsGrupoId, HttpStatus.OK);
 	}
 	
 	

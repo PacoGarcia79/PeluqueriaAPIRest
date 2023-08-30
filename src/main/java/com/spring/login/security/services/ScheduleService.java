@@ -17,14 +17,14 @@ import com.spring.login.repository.ScheduleRepository;
 public class ScheduleService {
 
 	@Autowired
-	private ScheduleRepository horarioRepository;
+	private ScheduleRepository scheduleRepository;
 
-	public List<Schedule> getHorarios() {
-		return horarioRepository.findAll();
+	public List<Schedule> getSchedule() {
+		return scheduleRepository.findAll();
 	}
 
 	public List<Availability> findNoAvailabilityDates() {
-		List<List<Object>> noAvailabilityDatesObj = horarioRepository.findNoAvailabilityDates();
+		List<List<Object>> noAvailabilityDatesObj = scheduleRepository.findNoAvailabilityDates();
 		List<Availability> noAvailabilityDates = new ArrayList<>();
 
 		for (List<Object> rawData : noAvailabilityDatesObj) {
@@ -42,50 +42,50 @@ public class ScheduleService {
 		return noAvailabilityDates;
 	}
 
-	public int addNoAvailabilityDates(Date fechaInicio, Date fechaFin, String empleados, String horarios) {
+	public int addNoAvailabilityDates(Date fechaInicio, Date fechaFin, String empleados, String schedule) {
 
-		return horarioRepository.addNoAvailability(fechaInicio, fechaFin, empleados, horarios);
+		return scheduleRepository.addNoAvailability(fechaInicio, fechaFin, empleados, schedule);
 	}
 
-	public int delNoAvailabilityDates(Date fechaInicio, Date fechaFin, String empleados, String horarios) {
+	public int delNoAvailabilityDates(Date fechaInicio, Date fechaFin, String empleados, String schedule) {
 
-		return horarioRepository.delNoAvailability(fechaInicio, fechaFin, empleados, horarios);
+		return scheduleRepository.delNoAvailability(fechaInicio, fechaFin, empleados, schedule);
 	}
 	
 	public int delNoAvailabilityDatesById(String ids) {
 
-		return horarioRepository.delNoAvailabilityById(ids);
+		return scheduleRepository.delNoAvailabilityById(ids);
 	}
 	
-	public Schedule save(Schedule horario) {
-		return horarioRepository.save(horario);
+	public Schedule save(Schedule schedule) {
+		return scheduleRepository.save(schedule);
 	}
 	
-	public List<Schedule> findEmployeeFreeScheduleByDate(Long idUsuario, Date date) {
-		List<List<Object>> freeHorariosByDateObj = horarioRepository.findEmployeeFreeScheduleByDate(idUsuario, date);
-		List<Schedule> freeHorariosByDate = new ArrayList<>();
+	public List<Schedule> findEmployeeFreeScheduleByDate(Long idUser, Date date) {
+		List<List<Object>> freeScheduleByDateObj = scheduleRepository.findEmployeeFreeScheduleByDate(idUser, date);
+		List<Schedule> freeScheduleByDate = new ArrayList<>();
 
-		for (List<Object> rawData : freeHorariosByDateObj) {
-			Schedule horario = new Schedule();
-			horario.setIdHorario(((BigInteger) rawData.get(0)).longValue());
-			horario.setHora((Time) rawData.get(1));
-			freeHorariosByDate.add(horario);
+		for (List<Object> rawData : freeScheduleByDateObj) {
+			Schedule schedule = new Schedule();
+			schedule.setIdHorario(((BigInteger) rawData.get(0)).longValue());
+			schedule.setHora((Time) rawData.get(1));
+			freeScheduleByDate.add(schedule);
 		}
 
-		return freeHorariosByDate;
+		return freeScheduleByDate;
 	}
 	
 	public List<Schedule> findFreeScheduleByDate(Date date) {
-		List<List<Object>> freeHorariosByDateObj = horarioRepository.findFreeScheduleByDate(date);
-		List<Schedule> freeHorariosByDate = new ArrayList<>();
+		List<List<Object>> freeScheduleByDateObj = scheduleRepository.findFreeScheduleByDate(date);
+		List<Schedule> freeScheduleByDate = new ArrayList<>();
 
-		for (List<Object> rawData : freeHorariosByDateObj) {
-			Schedule horario = new Schedule();
-			horario.setIdHorario(((BigInteger) rawData.get(0)).longValue());
-			horario.setHora((Time) rawData.get(1));
-			freeHorariosByDate.add(horario);
+		for (List<Object> rawData : freeScheduleByDateObj) {
+			Schedule schedule = new Schedule();
+			schedule.setIdHorario(((BigInteger) rawData.get(0)).longValue());
+			schedule.setHora((Time) rawData.get(1));
+			freeScheduleByDate.add(schedule);
 		}
 
-		return freeHorariosByDate;
+		return freeScheduleByDate;
 	}
 }
