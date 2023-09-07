@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.login.models.Appointment;
 import com.spring.login.models.Schedule;
 import com.spring.login.models.User;
-import com.spring.login.security.services.AppointmentService;
+import com.spring.login.services.AppointmentService;
 
 @RestController
 @RequestMapping(path = "/api/appointment", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })

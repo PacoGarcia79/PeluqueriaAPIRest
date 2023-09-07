@@ -25,7 +25,7 @@ import com.spring.login.models.Availability;
 import com.spring.login.models.Schedule;
 import com.spring.login.models.Service;
 import com.spring.login.payload.response.MessageResponse;
-import com.spring.login.security.services.ScheduleService;
+import com.spring.login.services.ScheduleService;
 
 @RestController
 @RequestMapping(path = "/api/schedule", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })

@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.login.models.Product;
 import com.spring.login.models.ProductGroup;
 import com.spring.login.repository.ProductRepository;
-import com.spring.login.security.services.ProductService;
+import com.spring.login.services.ProductService;
 import com.spring.login.utils.TestUtils;
 
 @RunWith(SpringRunner.class)

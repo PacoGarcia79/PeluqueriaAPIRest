@@ -31,7 +31,7 @@ import com.spring.login.payload.response.UserInfoResponse;
 import com.spring.login.repository.RoleRepository;
 import com.spring.login.repository.UserRepository;
 import com.spring.login.security.jwt.JwtUtils;
-import com.spring.login.security.services.UserDetailsImpl;
+import com.spring.login.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

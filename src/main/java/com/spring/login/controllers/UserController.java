@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.login.constants.ApiConstants;
 import com.spring.login.models.User;
 import com.spring.login.payload.response.MessageResponse;
-import com.spring.login.security.services.UserService;
+import com.spring.login.services.UserService;
 
 @RestController
 @RequestMapping(path = "/api/user", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })

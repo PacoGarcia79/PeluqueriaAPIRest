@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
 import com.spring.login.config.BezkoderProperties;
-import com.spring.login.security.services.UserDetailsImpl;
+import com.spring.login.services.UserDetailsImpl;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

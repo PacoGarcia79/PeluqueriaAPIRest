@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.login.models.EmployeeService;
-import com.spring.login.security.services.EmployeeServiceService;
+import com.spring.login.services.EmployeeServiceService;
 
 @RestController
 @RequestMapping(path = "/api/employeeService", produces = { MediaType.APPLICATION_JSON_VALUE,

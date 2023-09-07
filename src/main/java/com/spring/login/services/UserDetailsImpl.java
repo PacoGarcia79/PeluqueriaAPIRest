@@ -1,4 +1,4 @@
-package com.spring.login.security.services;
+package com.spring.login.services;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;

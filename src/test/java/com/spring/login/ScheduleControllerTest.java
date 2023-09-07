@@ -29,7 +29,7 @@ import com.spring.login.models.Availability;
 import com.spring.login.models.Schedule;
 import com.spring.login.models.Service;
 import com.spring.login.repository.ScheduleRepository;
-import com.spring.login.security.services.ScheduleService;
+import com.spring.login.services.ScheduleService;
 import com.spring.login.utils.TestUtils;
 
 @RunWith(SpringRunner.class)

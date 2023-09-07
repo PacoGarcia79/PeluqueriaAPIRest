@@ -1,4 +1,4 @@
-package com.spring.login.security.services;
+package com.spring.login.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

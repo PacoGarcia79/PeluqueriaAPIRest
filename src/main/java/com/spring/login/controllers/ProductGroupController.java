@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.login.models.ProductGroup;
-import com.spring.login.security.services.ProductGroupService;
+import com.spring.login.services.ProductGroupService;
 
 @RestController
 @RequestMapping(path = "/api/productsGroup", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
