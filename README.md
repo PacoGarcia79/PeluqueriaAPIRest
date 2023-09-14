@@ -1,3 +1,5 @@
+Rest services project for a hairdressing business, with all the CRUD methods necessary for performance, including users, schedules or appointments.
+
 Spring Boot Login and Registration example (Rest API) that supports JWT with HttpOnly Cookie.   
 
 User Login and Registration with JWT and Cookies (Spring Security & JWT)  
