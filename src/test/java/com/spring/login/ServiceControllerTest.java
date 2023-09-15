@@ -25,9 +25,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.login.models.Service;
-import com.spring.login.repository.ServiceRepository;
 import com.spring.login.utils.TestUtils;
+import com.spring.peluqueria.models.Service;
+import com.spring.peluqueria.repository.ServiceRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -1,4 +1,4 @@
-package com.spring.login.repository;
+package com.spring.peluqueria.repository;
 
 import java.sql.Date;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.spring.login.models.User;
+import com.spring.peluqueria.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

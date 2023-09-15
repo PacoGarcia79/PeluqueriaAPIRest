@@ -1,4 +1,4 @@
-package com.spring.login.controllers;
+package com.spring.peluqueria.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.login.constants.ApiConstants;
-import com.spring.login.models.Product;
-import com.spring.login.payload.response.MessageResponse;
-import com.spring.login.services.ProductService;
+import com.spring.peluqueria.constants.ApiConstants;
+import com.spring.peluqueria.models.Product;
+import com.spring.peluqueria.payload.response.MessageResponse;
+import com.spring.peluqueria.services.ProductService;
 
 @RestController
 @RequestMapping(path = "/api/product", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })

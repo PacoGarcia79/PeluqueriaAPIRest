@@ -1,10 +1,10 @@
-package com.spring.login;
+package com.spring.peluqueria;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-import com.spring.login.config.BezkoderProperties;
+import com.spring.peluqueria.config.BezkoderProperties;
 
 @SpringBootApplication
 @EnableConfigurationProperties(BezkoderProperties.class)

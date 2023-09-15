@@ -1,4 +1,4 @@
-package com.spring.login.models;
+package com.spring.peluqueria.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

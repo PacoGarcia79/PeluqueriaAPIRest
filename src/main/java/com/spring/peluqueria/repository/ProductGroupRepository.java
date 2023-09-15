@@ -1,10 +1,10 @@
-package com.spring.login.repository;
+package com.spring.peluqueria.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.spring.login.models.ProductGroup;
+import com.spring.peluqueria.models.ProductGroup;
 
 public interface ProductGroupRepository extends JpaRepository<ProductGroup, Long>{
 

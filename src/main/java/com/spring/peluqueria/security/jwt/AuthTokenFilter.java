@@ -1,4 +1,4 @@
-package com.spring.login.security.jwt;
+package com.spring.peluqueria.security.jwt;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.spring.login.services.UserDetailsServiceImpl;
+import com.spring.peluqueria.services.UserDetailsServiceImpl;
 
 public class AuthTokenFilter extends OncePerRequestFilter {
   @Autowired

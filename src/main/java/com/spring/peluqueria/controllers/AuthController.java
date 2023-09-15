@@ -1,4 +1,4 @@
-package com.spring.login.controllers;
+package com.spring.peluqueria.controllers;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,17 +21,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.login.models.ERole;
-import com.spring.login.models.Role;
-import com.spring.login.models.User;
-import com.spring.login.payload.request.LoginRequest;
-import com.spring.login.payload.request.SignupRequest;
-import com.spring.login.payload.response.MessageResponse;
-import com.spring.login.payload.response.UserInfoResponse;
-import com.spring.login.repository.RoleRepository;
-import com.spring.login.repository.UserRepository;
-import com.spring.login.security.jwt.JwtUtils;
-import com.spring.login.services.UserDetailsImpl;
+import com.spring.peluqueria.models.ERole;
+import com.spring.peluqueria.models.Role;
+import com.spring.peluqueria.models.User;
+import com.spring.peluqueria.payload.request.LoginRequest;
+import com.spring.peluqueria.payload.request.SignupRequest;
+import com.spring.peluqueria.payload.response.MessageResponse;
+import com.spring.peluqueria.payload.response.UserInfoResponse;
+import com.spring.peluqueria.repository.RoleRepository;
+import com.spring.peluqueria.repository.UserRepository;
+import com.spring.peluqueria.security.jwt.JwtUtils;
+import com.spring.peluqueria.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

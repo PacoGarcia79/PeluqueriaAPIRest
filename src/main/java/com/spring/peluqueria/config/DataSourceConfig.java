@@ -1,4 +1,4 @@
-package com.spring.login.config;
+package com.spring.peluqueria.config;
 
 import javax.sql.DataSource;
 

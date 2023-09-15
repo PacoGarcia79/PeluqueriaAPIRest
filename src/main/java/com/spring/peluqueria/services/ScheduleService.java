@@ -1,4 +1,4 @@
-package com.spring.login.services;
+package com.spring.peluqueria.services;
 
 import java.math.BigInteger;
 import java.sql.Date;
@@ -9,9 +9,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.login.models.Availability;
-import com.spring.login.models.Schedule;
-import com.spring.login.repository.ScheduleRepository;
+import com.spring.peluqueria.models.Availability;
+import com.spring.peluqueria.models.Schedule;
+import com.spring.peluqueria.repository.ScheduleRepository;
 
 @Service
 public class ScheduleService {

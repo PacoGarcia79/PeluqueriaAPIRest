@@ -1,4 +1,4 @@
-package com.spring.login.constants;
+package com.spring.peluqueria.constants;
 
 public class ApiConstants {
 	

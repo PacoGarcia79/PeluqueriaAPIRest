@@ -1,4 +1,4 @@
-package com.spring.login.payload.response;
+package com.spring.peluqueria.payload.response;
 import java.util.List;
 
 public class UserInfoResponse {

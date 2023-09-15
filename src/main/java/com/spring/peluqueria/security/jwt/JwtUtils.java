@@ -1,4 +1,4 @@
-package com.spring.login.security.jwt;
+package com.spring.peluqueria.security.jwt;
 
 import java.util.Date;
 
@@ -13,8 +13,8 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
-import com.spring.login.config.BezkoderProperties;
-import com.spring.login.services.UserDetailsImpl;
+import com.spring.peluqueria.config.BezkoderProperties;
+import com.spring.peluqueria.services.UserDetailsImpl;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

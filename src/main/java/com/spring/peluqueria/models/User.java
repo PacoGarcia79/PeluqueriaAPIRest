@@ -1,4 +1,4 @@
-package com.spring.login.models;
+package com.spring.peluqueria.models;
 
 import java.util.Date;
 import java.util.HashSet;

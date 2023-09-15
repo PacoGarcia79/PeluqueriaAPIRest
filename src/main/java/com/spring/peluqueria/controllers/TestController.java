@@ -1,4 +1,4 @@
-package com.spring.login.controllers;
+package com.spring.peluqueria.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;

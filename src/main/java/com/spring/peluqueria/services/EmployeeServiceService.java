@@ -1,10 +1,10 @@
-package com.spring.login.services;
+package com.spring.peluqueria.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.login.models.EmployeeService;
-import com.spring.login.repository.EmployeeServiceRepository;
+import com.spring.peluqueria.models.EmployeeService;
+import com.spring.peluqueria.repository.EmployeeServiceRepository;
 
 @Service
 public class EmployeeServiceService {

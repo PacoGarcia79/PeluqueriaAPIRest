@@ -1,4 +1,4 @@
-package com.spring.login.security.jwt;
+package com.spring.peluqueria.security.jwt;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

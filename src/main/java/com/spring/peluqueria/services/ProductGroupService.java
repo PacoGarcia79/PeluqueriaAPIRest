@@ -1,12 +1,12 @@
-package com.spring.login.services;
+package com.spring.peluqueria.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.login.models.ProductGroup;
-import com.spring.login.repository.ProductGroupRepository;
+import com.spring.peluqueria.models.ProductGroup;
+import com.spring.peluqueria.repository.ProductGroupRepository;
 
 @Service
 public class ProductGroupService {

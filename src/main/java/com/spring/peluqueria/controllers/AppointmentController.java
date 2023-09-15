@@ -1,4 +1,4 @@
-package com.spring.login.controllers;
+package com.spring.peluqueria.controllers;
 
 import java.sql.Date;
 import java.util.List;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.login.models.Appointment;
-import com.spring.login.models.Schedule;
-import com.spring.login.models.User;
-import com.spring.login.services.AppointmentService;
+import com.spring.peluqueria.models.Appointment;
+import com.spring.peluqueria.models.Schedule;
+import com.spring.peluqueria.models.User;
+import com.spring.peluqueria.services.AppointmentService;
 
 @RestController
 @RequestMapping(path = "/api/appointment", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })

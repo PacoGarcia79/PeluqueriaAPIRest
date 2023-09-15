@@ -1,4 +1,4 @@
-package com.spring.login.services;
+package com.spring.peluqueria.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.login.models.Product;
-import com.spring.login.repository.ProductRepository;
+import com.spring.peluqueria.models.Product;
+import com.spring.peluqueria.repository.ProductRepository;
 
 @Service
 public class ProductService {

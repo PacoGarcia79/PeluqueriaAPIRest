@@ -1,4 +1,4 @@
-package com.spring.login.controllers;
+package com.spring.peluqueria.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.login.models.EmployeeService;
-import com.spring.login.services.EmployeeServiceService;
+import com.spring.peluqueria.models.EmployeeService;
+import com.spring.peluqueria.services.EmployeeServiceService;
 
 @RestController
 @RequestMapping(path = "/api/employeeService", produces = { MediaType.APPLICATION_JSON_VALUE,

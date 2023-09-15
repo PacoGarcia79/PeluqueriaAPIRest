@@ -1,4 +1,4 @@
-package com.spring.login.controllers;
+package com.spring.peluqueria.controllers;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.login.models.ProductGroup;
-import com.spring.login.services.ProductGroupService;
+import com.spring.peluqueria.models.ProductGroup;
+import com.spring.peluqueria.services.ProductGroupService;
 
 @RestController
 @RequestMapping(path = "/api/productsGroup", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })

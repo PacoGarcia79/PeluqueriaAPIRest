@@ -1,11 +1,11 @@
-package com.spring.login.repository;
+package com.spring.peluqueria.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.spring.login.models.ERole;
-import com.spring.login.models.Role;
+import com.spring.peluqueria.models.ERole;
+import com.spring.peluqueria.models.Role;
 
 
 @Repository

@@ -1,4 +1,4 @@
-package com.spring.login.controllers;
+package com.spring.peluqueria.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.login.constants.ApiConstants;
-import com.spring.login.models.Service;
-import com.spring.login.payload.response.MessageResponse;
-import com.spring.login.repository.ServiceRepository;
+import com.spring.peluqueria.constants.ApiConstants;
+import com.spring.peluqueria.models.Service;
+import com.spring.peluqueria.payload.response.MessageResponse;
+import com.spring.peluqueria.repository.ServiceRepository;
 
 @RestController
 @RequestMapping(path = "/api/service", produces = { MediaType.APPLICATION_JSON_VALUE,

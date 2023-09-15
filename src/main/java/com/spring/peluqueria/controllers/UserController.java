@@ -1,4 +1,4 @@
-package com.spring.login.controllers;
+package com.spring.peluqueria.controllers;
 
 import java.sql.Date;
 import java.util.List;
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.login.constants.ApiConstants;
-import com.spring.login.models.User;
-import com.spring.login.payload.response.MessageResponse;
-import com.spring.login.services.UserService;
+import com.spring.peluqueria.constants.ApiConstants;
+import com.spring.peluqueria.models.User;
+import com.spring.peluqueria.payload.response.MessageResponse;
+import com.spring.peluqueria.services.UserService;
 
 @RestController
 @RequestMapping(path = "/api/user", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })

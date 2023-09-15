@@ -1,4 +1,4 @@
-package com.spring.login.payload.response;
+package com.spring.peluqueria.payload.response;
 public class MessageResponse {
 	private String message;
 

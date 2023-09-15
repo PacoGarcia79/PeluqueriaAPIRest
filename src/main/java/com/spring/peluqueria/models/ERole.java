@@ -1,4 +1,4 @@
-package com.spring.login.models;
+package com.spring.peluqueria.models;
 public enum ERole {
   ROLE_CLIENTE,
   ROLE_EMPLEADO,

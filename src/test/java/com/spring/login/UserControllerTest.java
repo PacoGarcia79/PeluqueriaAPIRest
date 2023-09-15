@@ -22,12 +22,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.login.models.Product;
-import com.spring.login.models.ProductGroup;
-import com.spring.login.models.User;
-import com.spring.login.repository.UserRepository;
-import com.spring.login.services.UserService;
 import com.spring.login.utils.TestUtils;
+import com.spring.peluqueria.models.Product;
+import com.spring.peluqueria.models.ProductGroup;
+import com.spring.peluqueria.models.User;
+import com.spring.peluqueria.repository.UserRepository;
+import com.spring.peluqueria.services.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

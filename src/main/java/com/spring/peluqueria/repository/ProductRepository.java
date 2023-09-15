@@ -1,4 +1,4 @@
-package com.spring.login.repository;
+package com.spring.peluqueria.repository;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.spring.login.models.Product;
+import com.spring.peluqueria.models.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long>{
 	

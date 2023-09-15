@@ -1,4 +1,4 @@
-package com.spring.login.payload.request;
+package com.spring.peluqueria.payload.request;
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {

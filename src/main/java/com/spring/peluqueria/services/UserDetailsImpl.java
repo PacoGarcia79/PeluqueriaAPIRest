@@ -1,4 +1,4 @@
-package com.spring.login.services;
+package com.spring.peluqueria.services;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.spring.login.models.User;
+import com.spring.peluqueria.models.User;
 
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;

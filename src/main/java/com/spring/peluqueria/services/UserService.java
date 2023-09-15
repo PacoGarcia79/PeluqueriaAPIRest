@@ -1,4 +1,4 @@
-package com.spring.login.services;
+package com.spring.peluqueria.services;
 
 import java.math.BigInteger;
 import java.sql.Date;
@@ -8,8 +8,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.login.models.User;
-import com.spring.login.repository.UserRepository;
+import com.spring.peluqueria.models.User;
+import com.spring.peluqueria.repository.UserRepository;
 
 @Service
 public class UserService {
