@@ -1,4 +1,4 @@
-package com.spring.login;
+package com.spring.peluqueria;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -25,9 +25,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.login.utils.TestUtils;
 import com.spring.peluqueria.models.Service;
 import com.spring.peluqueria.repository.ServiceRepository;
+import com.spring.peluqueria.utils.TestUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -35,7 +35,7 @@ import com.spring.peluqueria.repository.ServiceRepository;
 public class ServiceControllerTest {
 
 	@MockBean
-	private ServiceRepository servicioRepository;
+	private ServiceRepository serviceRepository;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -47,19 +47,19 @@ public class ServiceControllerTest {
 
 		TestUtils.mockAuthUser("EMPLEADO");
 
-		Service servicio1 = new Service();
-		Service servicio2 = new Service();
-		servicio1.setNombre("Corte Pelo");
-		servicio2.setNombre("Corte Barba");
+		Service service1 = new Service();
+		Service service2 = new Service();
+		service1.setNombre("Corte Pelo");
+		service2.setNombre("Corte Barba");
 
-		List<Service> servicios = new ArrayList<>();
+		List<Service> services = new ArrayList<>();
 
-		servicios.add(servicio1);
-		servicios.add(servicio2);
+		services.add(service1);
+		services.add(service2);
 
-		when(servicioRepository.findAll()).thenReturn(servicios);
+		when(serviceRepository.findAll()).thenReturn(services);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/servicio/getServicios").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/service/getServices").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("@.[0].nombre").value("Corte Pelo"));
 
@@ -70,14 +70,14 @@ public class ServiceControllerTest {
 
 		TestUtils.mockAuthUser("EMPLEADO");
 
-		Service servicio1 = new Service();
-		servicio1.setNombre("Corte Pelo");
+		Service service1 = new Service();
+		service1.setNombre("Corte Pelo");
 		
-		Optional<Service> optServ = Optional.of(servicio1);
+		Optional<Service> optServ = Optional.of(service1);
 
-		when(servicioRepository.findById(Mockito.anyLong())).thenReturn(optServ);
+		when(serviceRepository.findById(Mockito.anyLong())).thenReturn(optServ);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/servicio/{id}", 1).accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/service/{id}", 1).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("@.nombre").value("Corte Pelo"));
 
@@ -91,10 +91,10 @@ public class ServiceControllerTest {
 		//mockAuthUser();
 		TestUtils.mockAuthUser("CLIENTE");
 		
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/servicio/getServicios").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/service/getServices").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isForbidden()).andExpect(jsonPath("$").doesNotExist());
 
-		verify(servicioRepository, never()).findAll();
+		verify(serviceRepository, never()).findAll();
 	}
 	
 	@Test
@@ -102,15 +102,15 @@ public class ServiceControllerTest {
 
 		TestUtils.mockAuthUser("EMPLEADO");
 
-		Service servicio1 = new Service();
-		servicio1.setNombre("Corte Pelo");
+		Service service1 = new Service();
+		service1.setNombre("Corte Pelo");
 
-		when(servicioRepository.save(Mockito.any(Service.class))).thenReturn(servicio1);
+		when(serviceRepository.save(Mockito.any(Service.class))).thenReturn(service1);
 
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(servicio1);
+		String json = objectMapper.writeValueAsString(service1);
 		
-		mockMvc.perform(MockMvcRequestBuilders.post("/api/servicio/")
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/service/")
 				.content(json)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
@@ -122,15 +122,15 @@ public class ServiceControllerTest {
 
 		TestUtils.mockAuthUser("EMPLEADO");
 
-		Service servicio1 = new Service();
-		servicio1.setNombre("Corte Pelo");
+		Service service1 = new Service();
+		service1.setNombre("Corte Pelo");
 
-		when(servicioRepository.save(Mockito.any(Service.class))).thenReturn(servicio1);
+		when(serviceRepository.save(Mockito.any(Service.class))).thenReturn(service1);
 
 		ObjectMapper objectMapper = new ObjectMapper();
-		String json = objectMapper.writeValueAsString(servicio1);
+		String json = objectMapper.writeValueAsString(service1);
 		
-		mockMvc.perform(MockMvcRequestBuilders.put("/api/servicio/")
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/service/")
 				.content(json)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
@@ -142,15 +142,15 @@ public class ServiceControllerTest {
 		
 		TestUtils.mockAuthUser("EMPLEADO");
 		
-		Service servicio1 = new Service();
-		servicio1.setNombre("Corte Pelo");
-		servicio1.setIdServicio(1l);
+		Service service1 = new Service();
+		service1.setNombre("Corte Pelo");
+		service1.setIdServicio(1l);
 		
-		Optional<Service> optionalServicio = Optional.of(servicio1);
+		Optional<Service> optionalservice = Optional.of(service1);
 		
-		when(servicioRepository.findById(Mockito.anyLong())).thenReturn(optionalServicio);
+		when(serviceRepository.findById(Mockito.anyLong())).thenReturn(optionalservice);
 		
-		mockMvc.perform(MockMvcRequestBuilders.delete("/api/servicio/1"))
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/service/1"))
 		.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
@@ -159,13 +159,13 @@ public class ServiceControllerTest {
 		
 		TestUtils.mockAuthUser("EMPLEADO");
 		
-		Service servicio1 = new Service();
-		servicio1.setNombre("Corte Pelo");
-		servicio1.setIdServicio(1l);
+		Service service1 = new Service();
+		service1.setNombre("Corte Pelo");
+		service1.setIdServicio(1l);
 				
-		when(servicioRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+		when(serviceRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
 		
-		mockMvc.perform(MockMvcRequestBuilders.delete("/api/servicio/1"))
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/service/1"))
 		.andExpect(MockMvcResultMatchers.status().is4xxClientError());		
 	}
 

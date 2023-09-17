@@ -1,4 +1,4 @@
-package com.spring.login;
+package com.spring.peluqueria;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

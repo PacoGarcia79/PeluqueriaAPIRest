@@ -89,9 +89,9 @@ public class ServiceController {
 	 * @param id
 	 * @return
 	 */
-	@DeleteMapping("/{idServicio}")
+	@DeleteMapping("/{idService}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<MessageResponse> deleteService(@PathVariable(name = "idServicio") Long id) {
+	public ResponseEntity<MessageResponse> deleteService(@PathVariable(name = "idService") Long id) {
 
 		Optional<Service> optionalValue = serviceRepository.findById(id);
 

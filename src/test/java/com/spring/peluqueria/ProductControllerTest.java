@@ -1,4 +1,4 @@
-package com.spring.login;
+package com.spring.peluqueria;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -23,11 +23,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.login.utils.TestUtils;
 import com.spring.peluqueria.models.Product;
 import com.spring.peluqueria.models.ProductGroup;
 import com.spring.peluqueria.repository.ProductRepository;
 import com.spring.peluqueria.services.ProductService;
+import com.spring.peluqueria.utils.TestUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -60,7 +60,7 @@ public class ProductControllerTest {
 
 		when(productoService.findAll()).thenReturn(productos);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/producto/getProductos").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/product/getProducts").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("@.[0].nombre").value("Cera Pelo"));
 
@@ -88,7 +88,7 @@ public class ProductControllerTest {
 
 		when(productoService.findProductsByGroup(Mockito.anyString())).thenReturn(productos);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/producto/{grupo}", "Pelo").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/product/{group}", "Pelo").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)));
 
@@ -111,7 +111,7 @@ public class ProductControllerTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(producto1);
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/api/producto/").content(json)
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/product/").content(json)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("@.nombre").value("Cera Pelo"));
 	}
@@ -133,7 +133,7 @@ public class ProductControllerTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(producto1);
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/api/producto/").content(json)
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/product/").content(json)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("@.nombre").value("Cera Pelo"));
 	}
@@ -155,7 +155,7 @@ public class ProductControllerTest {
 		
 		when(productoService.findById(Mockito.anyLong())).thenReturn(optionalProducto);
 		
-		mockMvc.perform(MockMvcRequestBuilders.delete("/api/producto/12"))
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/product/12"))
 		.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
@@ -174,7 +174,7 @@ public class ProductControllerTest {
 				
 		when(productoService.findById(Mockito.anyLong())).thenReturn(Optional.empty());
 		
-		mockMvc.perform(MockMvcRequestBuilders.delete("/api/producto/12"))
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/product/12"))
 		.andExpect(MockMvcResultMatchers.status().is4xxClientError());		
 	}
 	
@@ -196,7 +196,7 @@ public class ProductControllerTest {
 
 		when(productoService.findProductsByQuerySearch(Mockito.anyString())).thenReturn(productos);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/producto/search/{query}", "Pelo").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/product/search/{query}", "Pelo").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)));
 

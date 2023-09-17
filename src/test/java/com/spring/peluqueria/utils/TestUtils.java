@@ -1,4 +1,4 @@
-package com.spring.login.utils;
+package com.spring.peluqueria.utils;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

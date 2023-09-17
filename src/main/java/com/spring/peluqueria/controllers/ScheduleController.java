@@ -67,19 +67,19 @@ public class ScheduleController {
 	/**
 	 * Este metodo se usa para añadir el/los horario/s del/los empleado/s al listado de no disponibilidad,
      * para una fecha o un periodo de fechas
-	 * @param fechaComienzo
-	 * @param fechaFinal
-	 * @param empleados
+	 * @param startDate
+	 * @param endDate
+	 * @param employees
 	 * @param schedule
 	 * @return
 	 */
-	@PutMapping("/addNoAvailabilityDates/{fechaComienzo}/{fechaFin}/{empleados}/{horas}")
+	@PutMapping("/addNoAvailabilityDates/{startDate}/{endDate}/{employees}/{times}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<MessageResponse> addNoAvailabilityDates(@PathVariable("fechaComienzo") Date fechaComienzo,
-			@PathVariable("fechaFin") Date fechaFinal, @PathVariable("empleados") String empleados,
-			@PathVariable("horas") String schedule) {
+	public ResponseEntity<MessageResponse> addNoAvailabilityDates(@PathVariable("startDate") Date startDate,
+			@PathVariable("endDate") Date endDate, @PathVariable("employees") String employees,
+			@PathVariable("times") String schedule) {
 
-		int result = scheduleService.addNoAvailabilityDates(fechaComienzo, fechaFinal, empleados, schedule);
+		int result = scheduleService.addNoAvailabilityDates(startDate, endDate, employees, schedule);
 
 		return getResponseMessage(result);
 	}
@@ -87,19 +87,19 @@ public class ScheduleController {
 	/**
 	 * Este metodo se usa para eliminar el/los horario/s del/los empleado/s del listado de no disponibilidad,
      * para una fecha o un periodo de fechas
-	 * @param fechaComienzo
-	 * @param fechaFinal
-	 * @param empleados
+	 * @param startDate
+	 * @param endDate
+	 * @param employees
 	 * @param schedule
 	 * @return
 	 */
-	@PutMapping("/delNoAvailabilityDates/{fechaComienzo}/{fechaFin}/{empleados}/{horas}")
+	@PutMapping("/delNoAvailabilityDates/{startDate}/{endDate}/{employees}/{times}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-	public ResponseEntity<MessageResponse> delNoAvailabilityDates(@PathVariable("fechaComienzo") Date fechaComienzo,
-			@PathVariable("fechaFin") Date fechaFinal, @PathVariable("empleados") String empleados,
-			@PathVariable("horas") String schedule) {
+	public ResponseEntity<MessageResponse> delNoAvailabilityDates(@PathVariable("startDate") Date startDate,
+			@PathVariable("endDate") Date endDate, @PathVariable("employees") String employees,
+			@PathVariable("times") String schedule) {
 
-		int result = scheduleService.delNoAvailabilityDates(fechaComienzo, fechaFinal, empleados, schedule);
+		int result = scheduleService.delNoAvailabilityDates(startDate, endDate, employees, schedule);
 
 		return getResponseMessage(result);
 	}
