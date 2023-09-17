@@ -8,10 +8,10 @@ import com.spring.peluqueria.config.BezkoderProperties;
 
 @SpringBootApplication
 @EnableConfigurationProperties(BezkoderProperties.class)
-public class SpringBootLoginExampleApplication {
+public class SpringBootPeluqueriaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootLoginExampleApplication.class, args);
+		SpringApplication.run(SpringBootPeluqueriaApplication.class, args);
 	}
 
 }
