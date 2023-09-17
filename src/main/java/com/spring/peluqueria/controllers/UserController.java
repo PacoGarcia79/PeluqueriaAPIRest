@@ -138,7 +138,7 @@ public class UserController {
 	 * Este metodo se usa para añadir los horarios a cada empleado.
 	 * @return
 	 */
-	@PutMapping("/horarios")
+	@PutMapping("/schedule")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')") 
 	public ResponseEntity<Boolean> addHorariosToUser() {
 		return new ResponseEntity<>(userService.addHorariosToUser(), HttpStatus.OK);

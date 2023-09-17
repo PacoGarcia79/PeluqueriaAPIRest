@@ -1,4 +1,4 @@
-package com.spring.login;
+package com.spring.peluqueria;
 
 import static org.mockito.Mockito.when;
 
@@ -16,12 +16,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.login.utils.TestUtils;
 import com.spring.peluqueria.models.EmployeeService;
 import com.spring.peluqueria.models.Service;
 import com.spring.peluqueria.models.User;
 import com.spring.peluqueria.repository.EmployeeServiceRepository;
 import com.spring.peluqueria.services.EmployeeServiceService;
+import com.spring.peluqueria.utils.TestUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -57,7 +57,7 @@ public class EmployeeServiceControllerTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(servicioEmpleado1);
 		
-		mockMvc.perform(MockMvcRequestBuilders.post("/api/servicioEmpleado/")
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/employeeService/")
 				.content(json)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))

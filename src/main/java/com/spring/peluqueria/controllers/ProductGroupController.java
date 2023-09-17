@@ -65,13 +65,13 @@ public class ProductGroupController {
 	
 	/**
 	 * Este metodo se usa para obtener el id de un grupo de productos, mediante el nombre
-	 * @param nombreGrupo
+	 * @param groupName
 	 * @return
 	 */
-	@GetMapping("/{nombreGrupo}")
+	@GetMapping("/{groupName}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
-	public ResponseEntity<Long> getProductsGrupoIdByGroupName(@PathVariable(name= "nombreGrupo") String nombreGrupo) {
-		Long productsGrupoId = productsGrupoService.findIdByNombreGrupo(nombreGrupo);
+	public ResponseEntity<Long> getProductsGrupoIdByGroupName(@PathVariable(name= "groupName") String groupName) {
+		Long productsGrupoId = productsGrupoService.findIdByNombreGrupo(groupName);
 		
 		return productsGrupoId == null ? ResponseEntity.noContent().build() : new ResponseEntity<>(productsGrupoId, HttpStatus.OK);
 	}

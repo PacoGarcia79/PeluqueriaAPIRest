@@ -1,4 +1,4 @@
-package com.spring.login;
+package com.spring.peluqueria;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -22,12 +22,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.login.utils.TestUtils;
 import com.spring.peluqueria.models.Product;
 import com.spring.peluqueria.models.ProductGroup;
 import com.spring.peluqueria.models.User;
 import com.spring.peluqueria.repository.UserRepository;
 import com.spring.peluqueria.services.UserService;
+import com.spring.peluqueria.utils.TestUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -233,7 +233,7 @@ public class UserControllerTest {
 		when(userRepository.addHorariosToUser()).thenReturn(user1.getId());
 		when(userService.addHorariosToUser()).thenReturn(true);
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/api/user/horarios/")
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/user/schedule/")
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 
 	}

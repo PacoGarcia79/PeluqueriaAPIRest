@@ -1,4 +1,4 @@
-package com.spring.login;
+package com.spring.peluqueria;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -21,11 +21,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.login.utils.TestUtils;
 import com.spring.peluqueria.models.Product;
 import com.spring.peluqueria.models.ProductGroup;
 import com.spring.peluqueria.repository.ProductGroupRepository;
 import com.spring.peluqueria.services.ProductGroupService;
+import com.spring.peluqueria.utils.TestUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -58,7 +58,7 @@ public class ProductGroupControllerTest {
 
 		when(productosGrupoService.findAll()).thenReturn(productosGrupos);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/productosGrupo/getProductosGrupo").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/productsGroup/getProductsGroup").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("@.[0].nombreGrupo").value("Pelo"));
 
@@ -77,7 +77,7 @@ public class ProductGroupControllerTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(productosGrupo1);
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/api/productosGrupo/").content(json)
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/productsGroup/").content(json)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("@.nombreGrupo").value("Pelo"));
 	}
@@ -95,7 +95,7 @@ public class ProductGroupControllerTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(productosGrupo1);
 
-		mockMvc.perform(MockMvcRequestBuilders.put("/api/productosGrupo/").content(json)
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/productsGroup/").content(json)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("@.nombreGrupo").value("Pelo"));
 	}
@@ -107,7 +107,7 @@ public class ProductGroupControllerTest {
 
 		when(productosGrupoService.findIdByNombreGrupo(Mockito.anyString())).thenReturn(1L);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/productosGrupo/{nombreGrupo}", "Pelo").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/productsGroup/{groupName}", "Pelo").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 
 	}
@@ -119,7 +119,7 @@ public class ProductGroupControllerTest {
 
 		when(productosGrupoService.findIdByNombreGrupo(Mockito.anyString())).thenReturn(null);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/productosGrupo/{nombreGrupo}", "Pelo").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/productsGroup/{groupName}", "Pelo").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().is2xxSuccessful());
 
 	}
