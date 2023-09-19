@@ -92,7 +92,7 @@ public class UserController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("id/{id}")
+	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
 	public ResponseEntity<User> findUserById(@PathVariable(name = "id") Long id) {
@@ -110,7 +110,7 @@ public class UserController {
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	public ResponseEntity<User> postUser(@RequestBody User user) {
-		return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
+		return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
 	}
 
 	/**

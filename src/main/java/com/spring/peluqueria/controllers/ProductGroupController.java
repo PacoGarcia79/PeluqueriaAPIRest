@@ -49,7 +49,7 @@ public class ProductGroupController {
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<ProductGroup> postProductsGroup(@RequestBody ProductGroup productsGroup) {
-		return new ResponseEntity<>(productsGrupoService.save(productsGroup), HttpStatus.OK);
+		return new ResponseEntity<>(productsGrupoService.save(productsGroup), HttpStatus.CREATED);
 	}
 	
 	/**

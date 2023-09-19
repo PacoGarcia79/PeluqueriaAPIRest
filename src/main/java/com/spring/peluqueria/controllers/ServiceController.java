@@ -70,7 +70,7 @@ public class ServiceController {
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<Service> postService(@RequestBody Service service) {
-		return new ResponseEntity<>(serviceRepository.save(service), HttpStatus.OK);
+		return new ResponseEntity<>(serviceRepository.save(service), HttpStatus.CREATED);
 	}
 
 	/**
