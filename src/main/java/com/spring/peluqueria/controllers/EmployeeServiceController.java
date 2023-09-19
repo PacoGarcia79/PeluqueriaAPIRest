@@ -31,7 +31,7 @@ public class EmployeeServiceController {
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<EmployeeService> postEmployeeService(@RequestBody EmployeeService employeeService) {
-		return new ResponseEntity<>(employeeServiceService.save(employeeService), HttpStatus.OK);
+		return new ResponseEntity<>(employeeServiceService.save(employeeService), HttpStatus.CREATED);
 	}
 	
 	//TODO serviciosEmpleadosGet y siguientes if necessary

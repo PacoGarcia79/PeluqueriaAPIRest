@@ -67,7 +67,7 @@ public class ProductController {
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<Product> postProduct(@RequestBody Product product) {
-		return new ResponseEntity<>(productService.save(product), HttpStatus.OK);
+		return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
 	}
 	
 	/**

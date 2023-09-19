@@ -138,7 +138,7 @@ public class ScheduleController {
 	@PostMapping()
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
 	public ResponseEntity<Schedule> postSchedule(@RequestBody Schedule schedule) {
-		return new ResponseEntity<>(scheduleService.save(schedule), HttpStatus.OK);
+		return new ResponseEntity<>(scheduleService.save(schedule), HttpStatus.CREATED);
 	}
 	
 
