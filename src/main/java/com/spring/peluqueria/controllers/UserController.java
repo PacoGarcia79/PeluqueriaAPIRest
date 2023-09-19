@@ -92,7 +92,7 @@ public class UserController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("id/{id}")
+	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN') or hasRole('CLIENTE')")
 	@ResponseBody
 	public ResponseEntity<User> findUserById(@PathVariable(name = "id") Long id) {
